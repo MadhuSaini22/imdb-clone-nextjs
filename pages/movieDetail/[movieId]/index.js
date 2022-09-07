@@ -13,7 +13,7 @@ function MovieDetail() {
 
   const getData = () => {
     fetch(
-      `https://api.themoviedb.org/3/movie/${movieId}?api_key=4e44d9029b1270a757cddc766a1bcb63&${IMAGE_END}`
+      `https://api.themoviedb.org/3/movie/${movieId}?api_key=4e44d9029b1270a757cddc766a1bcb63&language=en-US`
     )
       .then((res) => res.json())
       .then((data) => setMovie(data));
