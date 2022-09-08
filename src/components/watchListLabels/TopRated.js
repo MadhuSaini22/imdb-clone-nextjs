@@ -1,29 +1,25 @@
 import React, { useContext } from "react";
-import { Link, useNavigate } from "react-router-dom";
 import { IMAGE_PATH } from "../../../Config";
+import Link from "next/link";
 
 export const TopRated = ({ movie }) => {
-   
-
   const currentUser = "simran";
   const watchlistDisabled = true;
   return (
     <div>
       <div className=" hover:opacity-90 flex-col relative rounded overflow-hidden cursor-pointer  ">
         <div className="relative">
-          
-            <img
-              className=""
-              src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
-              alt="img"
-            />
-         
+          <Link href={`/movieDetail/${movie.id}`}>
+            <a>
+              <img
+                className=""
+                src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
+                alt="img"
+              />
+            </a>
+          </Link>
           {/* { console.log(watchlistDisabled)} */}
-          <button
-           
-            
-            className="z-[9]"
-          >
+          <button className="z-[9]">
             {currentUser ? (
               <div>
                 {watchlistDisabled && watchlistDisabled == false ? (
@@ -138,22 +134,24 @@ export const TopRated = ({ movie }) => {
             )}
           </button>
         </div>
-        
-          <div className="absolute mb-3 p-3 bottom-0 h-40 flex flex-col w-10/12 justify-end opacity-0 hover:opacity-100">
-            <div className="card__title text-base font-black mb-1.5">
-              {movie.original_title}
+        <Link href={`/movieDetail/${movie.id}`}>
+          <a>
+            <div className="absolute mb-3 p-3 bottom-0 h-40 flex flex-col w-10/12 justify-end opacity-0 hover:opacity-100">
+              <div className="card__title text-base font-black mb-1.5">
+                {movie.original_title}
+              </div>
+              <div className=" text-xs m-1">
+                {movie.release_date}
+                <span className="float-right">
+                  {movie.vote_average} <i className="fas fa-star"></i>
+                </span>
+              </div>
+              <div className="truncate">
+                {movie.overview.slice(0, 118) + "..."}
+              </div>
             </div>
-            <div className=" text-xs m-1">
-              {movie.release_date}
-              <span className="float-right">
-                {movie.vote_average} <i className="fas fa-star"></i>
-              </span>
-            </div>
-            <div className="truncate">
-              {movie.overview.slice(0, 118) + "..."}
-            </div>
-          </div>
-       
+          </a> 
+        </Link>
       </div>
     </div>
   );

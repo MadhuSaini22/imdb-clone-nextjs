@@ -1,7 +1,9 @@
-import React, { useState, useRef } from "react";
+import React, { useState,useEffect, useRef } from "react";
 import { btnvarient } from "../src/staticValues";
 import { Link, useNavigate } from "react-router-dom";
 import Button from "../src/components/Button";
+import { useRouter } from 'next/router';
+import { useAuth } from '../src/contexts/AuthUserProvider';
 function SignIn() {
 
   const emailRef = useRef();

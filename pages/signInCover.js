@@ -6,7 +6,7 @@ import LabelCard from "../src/components/LabelCard";
 
 function SignInCover() {
   return (
-    <div className="downContainerMain   bg-gradient-to-t from-gray-50 to-cover">
+    <div className="downContainerMain h-screen bg-gradient-to-t from-gray-50 to-cover">
       <div className="max-w-container m-auto ">
         <div className=" w-full  justify-items-center  font-coverFont">
           <div className=" max-w-5xl flex bg-white p-5  !text-slate-800 mx-auto">

@@ -106,38 +106,39 @@ function Home() {
                         </div>
 
                         <div className="col-span-3 cursor-pointer group max-w-xs p-1  ">
-                          {/* <Link to={`/movie/${movie.id}`}> */}
-                          <svg
-                            width="30"
-                            height="30"
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="ipc-icon m-1 group-hover:text-yellow-400 cursor-pointer ipc-icon--play-circle-outline-large-inline ipc-icon--inline sc-4cf1171c-14 bseoUA editorial-play-icon"
-                            id="iconContext-play-circle-outline-large-inline"
-                            viewBox="0 0 24 24"
-                            fill="currentColor"
-                            role="presentation"
-                          >
-                            <path d="M10.803 15.932l4.688-3.513a.498.498 0 0 0 0-.803l-4.688-3.514a.502.502 0 0 0-.803.402v7.026c0 .412.472.653.803.402z"></path>
-                            <path d="M12 24C5.373 24 0 18.627 0 12S5.373 0 12 0s12 5.373 12 12-5.373 12-12 12zm0-1c6.075 0 11-4.925 11-11S18.075 1 12 1 1 5.925 1 12s4.925 11 11 11z"></path>
-                          </svg>
-                          <div>{movie ? movie.original_title : ""}</div>
-                          <div> {movie ? movie.release_date : ""}</div>
+                          <Link href={`/movieDetail/${movie.id}`}>
+                            <a>
+                              <svg
+                                width="30"
+                                height="30"
+                                xmlns="http://www.w3.org/2000/svg"
+                                className="ipc-icon m-1 group-hover:text-yellow-400 cursor-pointer ipc-icon--play-circle-outline-large-inline ipc-icon--inline sc-4cf1171c-14 bseoUA editorial-play-icon"
+                                id="iconContext-play-circle-outline-large-inline"
+                                viewBox="0 0 24 24"
+                                fill="currentColor"
+                                role="presentation"
+                              >
+                                <path d="M10.803 15.932l4.688-3.513a.498.498 0 0 0 0-.803l-4.688-3.514a.502.502 0 0 0-.803.402v7.026c0 .412.472.653.803.402z"></path>
+                                <path d="M12 24C5.373 24 0 18.627 0 12S5.373 0 12 0s12 5.373 12 12-5.373 12-12 12zm0-1c6.075 0 11-4.925 11-11S18.075 1 12 1 1 5.925 1 12s4.925 11 11 11z"></path>
+                              </svg>
+                              <div>{movie ? movie.original_title : ""}</div>
+                              <div> {movie ? movie.release_date : ""}</div>
 
-                          <div className="truncate font-normal text-sm leading-5 text-stone-400  ">
-                            {movie ? movie.overview : ""}
-                          </div>
-                          {/* </Link> */}
+                              <div className="truncate font-normal text-sm leading-5 text-stone-400  ">
+                                {movie ? movie.overview : ""}
+                              </div>
+                            </a>
+                          </Link>
                         </div>
                       </div>
                     ))}
                   </div>
-                  {/* <Link
-                    to="/movies/upcoming"
-                    className="flex hover:text-yellow-400  font-bold mt-2 text-xl"
-                  > */}
-                  <span className="ml-2">Browse trailers</span>
-                  <ChevronRightIcon className="w-5" />
-                  {/* </Link> */}
+                  <Link href="/movie/upcoming">
+                    <a className="flex hover:text-yellow-400  font-bold  text-xl">
+                      <span className="ml-2">Browse trailers</span>
+                      <ChevronRightIcon className="w-5" />
+                    </a>
+                  </Link>
                 </div>
               </div>
 

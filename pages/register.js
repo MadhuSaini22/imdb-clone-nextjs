@@ -1,36 +1,33 @@
 import React, { useRef, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../src/contexts/AuthUserProvider";
+import { useRouter } from "next/router";
 
 function Register() {
-  const emailRef = useRef();
-  const passwordRef = useRef();
-  const passwordConfirmRef = useRef();
-  const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
-  const currentUser = "simran";
-  async function handleSubmit(e) {
-    e.preventDefault();
-    console.log(
-      emailRef.current.value,
-      passwordConfirmRef.current.value,
-      passwordRef.current.value
-    );
+  const [email, setEmail] = useState("");
+  const [passwordOne, setPasswordOne] = useState("");
+  const [passwordTwo, setPasswordTwo] = useState("");
+  const router = useRouter();
+  const [error, setError] = useState(null);
 
-    if (passwordRef.current.value !== passwordConfirmRef.current.value) {
-      return setError("Passwords do not match");
-    }
-
-    try {
-      setError("");
-      setLoading(true);
-      console.log(emailRef.current.value, passwordRef.current.value);
-      await signup(emailRef.current.value, passwordRef.current.value);
-    } catch {
-      setError("Failed to create an account");
-    }
-
-    setLoading(false);
-  }
+  const { createUserWithEmailAndPassword } = useAuth();
+const currentUser="simran"
+  const onSubmit = (event) => {
+    setError(null);
+    //check if passwords match. If they do, create user in Firebase
+    // and redirect to your logged in page.
+    if (passwordOne === passwordTwo)
+      createUserWithEmailAndPassword(email, passwordOne)
+        .then((authUser) => {
+          console.log("Success. The user is created in Firebase");
+          router.push("/signIn");
+        })
+        .catch((error) => {
+          // An error occurred. Set error message to be displayed to user
+          setError(error.message);
+        });
+    else setError("Password do not match");
+    event.preventDefault();
+  };
 
   return (
     <div>
@@ -49,7 +46,7 @@ function Register() {
             {error && alert(JSON.stringify(error))}
             {/* {error && <alert>{error}} */}
             <div className="max-w-sm border rounded px-7 m-5 py-6 border-slate-200 !text-slate-800 mx-auto">
-              <form onSubmit={handleSubmit}>
+              <form onSubmit={onSubmit}>
                 <div className="rounded  mb-2">
                   <h2 className="text-3xl font-normal">Create account</h2>
                   {currentUser && currentUser.email}
@@ -59,9 +56,10 @@ function Register() {
                   <label className=" font-bold text-sm">Email</label>
                   <input
                     className="w-full text-slate-600 text-sm py-1 focus:border-orange-600 focus:shadow-input-focus px-2 border border-gray-400 rounded outline-none "
-                    id="email"
+                    onChange={(event) => setEmail(event.target.value)}
+                    name="email"
+                    id="signUpEmail"
                     type="email"
-                    ref={emailRef}
                     required
                   />
                 </div>
@@ -71,9 +69,12 @@ function Register() {
                   <input
                     className="w-full text-slate-600 text-sm py-1 focus:border-orange-600 focus:shadow-input-focus px-2 border border-gray-400 rounded outline-none "
                     placeholder="at least 8 characters"
-                    id="password"
+                    
                     type="password"
-                    ref={passwordRef}
+                    name="passwordOne"
+                    value={passwordOne}
+                    onChange={(event) => setPasswordOne(event.target.value)}
+                    id="signUpPassword"
                     required
                   />
                   <p className="text-sm ">
@@ -81,14 +82,17 @@ function Register() {
                   </p>
                 </div>
                 <div className="rounded  mb-3  mt-1">
-                  <label  className=" font-bold text-sm">
+                  <label className=" font-bold text-sm">
                     Re-enter password
                   </label>
                   <input
                     className="w-full text-slate-600 text-sm py-1 focus:border-orange-600 focus:shadow-input-focus px-2 border border-gray-400 rounded outline-none "
-                    id="password"
+                    name="password"
+                    value={passwordTwo}
+                    onChange={(event) => setPasswordTwo(event.target.value)}
+                    id="signUpPassword2"
                     type="password"
-                    ref={passwordConfirmRef}
+                    
                     required
                   />
                 </div>
@@ -97,7 +101,7 @@ function Register() {
                   <button
                     className={`bg-yellowLight  border-gray-400 text-sm w-full rounded border outline-none cursor-pointer h-8 text-slate-900`}
                     type="submit"
-                    disabled={loading}
+                    
                   >
                     Create your IMDb account
                   </button>
@@ -163,3 +167,14 @@ function Register() {
 }
 
 export default Register;
+
+
+
+// public class ENACTON{
+//     public static void main(String[] args){
+//         ENACTON coder= new ENACTON();
+//         coder.reliability=100;
+//         System.out.println("Where reliability matters");
+//         return reliability;
+//     }
+// }

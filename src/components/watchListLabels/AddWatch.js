@@ -5,17 +5,23 @@ import Link from "next/link";
 import { IMAGE_PATH } from "../../../Config";
 export const AddWatch = ({ movie }) => {
   const router = useRouter();
- 
+
   const currentUser = "simran";
   const watchlistDisabled = true;
   return (
     <div>
       <div className="relative group ">
-        <img
-          className="m-auto block group-hover:opacity-90"
-          src={`https://image.tmdb.org/t/p/original/${movie ? movie.backdrop_path : ""}`}
-          alt="img"
-        />
+        <Link href={`/movieDetail/${movie.id}`}>
+          <a>
+            <img
+              className="m-auto block group-hover:opacity-90"
+              src={`https://image.tmdb.org/t/p/original/${
+                movie ? movie.backdrop_path : ""
+              }`}
+              alt="img"
+            />{" "}
+          </a>
+        </Link>
         <button className="z-[9]">
           {currentUser ? (
             <div>
@@ -131,22 +137,25 @@ export const AddWatch = ({ movie }) => {
           )}
         </button>
       </div>
-      
-        <div className=" absolute px-20 py-10 lg:bottom-1 lg:h-4/6 md:h-5/6 sm:h-5/6 max-h-80  flex flex-col justify-center  items-start  transition-opacity bottom-0 ">
-          <div className=" lg:text-4xl md:text-2xl sm:text-2xl text-lg lg:mb-2">
-            {movie ? movie.original_title : ""}
+      <div></div>
+      <Link href={`/movieDetail/${movie.id}`}>
+        <a>
+          <div className=" absolute px-20 py-10 lg:bottom-1 lg:h-4/6 md:h-5/6 sm:h-5/6 max-h-80  flex flex-col justify-center  items-start  transition-opacity bottom-0 ">
+            <div className=" lg:text-4xl md:text-2xl sm:text-2xl text-lg lg:mb-2">
+              {movie ? movie.original_title : ""}
+            </div>
+            <div className=" text-sm lg:mb-2">
+              {movie ? movie.release_date : ""}
+              <span className=" text-sm lg:mb-2">
+                {movie ? movie.vote_average : ""}⭐
+              </span>
+            </div>
+            <div className="line-clamp-2 lg:text-lg md:text-lg sm:text-lg text-sm lg:mb-2">
+              {movie ? movie.overview : ""}
+            </div>
           </div>
-          <div className=" text-sm lg:mb-2">
-            {movie ? movie.release_date : ""}
-            <span className=" text-sm lg:mb-2">
-              {movie ? movie.vote_average : ""}⭐
-            </span>
-          </div>
-          <div className="line-clamp-2 lg:text-lg md:text-lg sm:text-lg text-sm lg:mb-2">
-            {movie ? movie.overview : ""}
-          </div>
-        </div>
-     
+        </a>
+      </Link>
     </div>
   );
 };
