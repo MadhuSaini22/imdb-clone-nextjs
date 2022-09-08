@@ -3,7 +3,7 @@ import logoImg from "../src/assets/google.png";
 import { ChevronDownIcon } from "@heroicons/react/outline";
 import Button from "../src/components/Button";
 import LabelCard from "../src/components/LabelCard";
-
+import Link from "next/link"
 function SignInCover() {
   return (
     <div className="downContainerMain h-screen bg-gradient-to-t from-gray-50 to-cover">
@@ -13,14 +13,14 @@ function SignInCover() {
             <div className=" w-5/12  grid justify-center">
               <div className="w-full mb-4 text-center">
                 <p className="text-xl mt-7 m-auto font-bold">Sign in</p>
-                
+                <Link href="/signIn"><a>
                   <LabelCard
                     icon={
                       "https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/IMDB_Logo_2016.svg/2560px-IMDB_Logo_2016.svg.png"
                     }
                     authName="Sign In with IMDb"
-                  />
-               
+                  /></a>
+                </Link>
                 <LabelCard icon={logoImg} authName="Sign In with Google" />
                 <div className="flex mt-5 mb-7 justify-center text-sm">
                   <p className="flex  text-dark-forgot">
@@ -38,7 +38,7 @@ function SignInCover() {
                     className=" bg-yellow-500 font-bold text-sm w-full rounded border outline-none cursor-pointer h-9 text-slate-900"
                     type="submit"
                   >
-                    <a to="/register">Create a New Account</a>
+                    <Link href="/register"><a >Create a New Account</a></Link>
                   </button>
                 </div>
               </div>

@@ -1,10 +1,20 @@
-import React, { useState, useContext } from "react";
+import React, { useState,useEffect, useContext } from "react";
 import { MenuIcon } from "@heroicons/react/outline";
 import { ResultCard } from "./ResultCard";
 import { IMAGE_END, TMDB_KEY } from "../../Config";
 import Link from "next/link";
+import { useRouter } from 'next/router';
+import { useAuth } from '../contexts/AuthUserProvider';
+
 
 const Header = () => {
+  const { authUser, loading, signOut } = useAuth();
+  const router = useRouter();
+  useEffect(() => {
+    if (!loading && !authUser)
+      router.push('/signIn')
+  }, [authUser, loading])
+
   const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
   const [menu, setMenu] = useState(false);
@@ -304,11 +314,11 @@ const Header = () => {
           </a>
         </Link>
       </div>
-      <Link href={`${currentUser ? "/signIn" : "/signInCover"}`}>
+      <Link href={`${authUser ? "/signIn" : "/signInCover"}`}>
         <a>
-          <div className=" hover:bg-slate-800 py-2 px-2  rounded align-middle justify-center flex">
-            {currentUser ? (
-              <span className="text-sm font-semibold ">Log Out</span>
+          <div className=" hover:bg-slate-800 py-2 px-2  rounded align-middle justify-center flex ">
+            {authUser ? (
+              <span className="text-sm font-semibold " onClick={signOut}>Log Out</span>
             ) : (
               <span className="text-sm font-semibold ">Sign In </span>
             )}

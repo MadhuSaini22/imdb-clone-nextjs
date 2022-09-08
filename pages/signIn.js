@@ -6,25 +6,25 @@ import { useRouter } from 'next/router';
 import { useAuth } from '../src/contexts/AuthUserProvider';
 function SignIn() {
 
-  const emailRef = useRef();
-  const passwordRef = useRef();
-  const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState(null);
+  const router = useRouter();
+  const { signInWithEmailAndPassword } = useAuth();
 
-  async function handleSubmit(e) {
-    e.preventDefault();
+  const onSubmit = event => {
+    setError(null)
+    signInWithEmailAndPassword(email, password)
+    .then(authUser => {
+      router.push('/');
+    })
+    .catch(error => {
+      setError(error.message)
+    });
+    event.preventDefault();
+  };
 
-    try {
-      setError("");
-      setLoading(true);
-      console.log(emailRef.current.value, passwordRef.current.value);
-      await login(emailRef.current.value, passwordRef.current.value);
-    } catch {
-      setError("Failed to log in");
-    }
 
-    setLoading(false);
-  }
   return (
     <div className=" h-screen bg-white">
       <div className="max-w-container m-auto bg-white">
@@ -39,7 +39,7 @@ function SignIn() {
           {console.log(JSON.stringify(error))}
           {error && alert(JSON.stringify(error))}
           <div className="max-w-sm border rounded px-7 m-5 py-6 border-slate-200 !text-slate-800 mx-auto">
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={onSubmit}>
               <div className="rounded  mb-2">
                 <h2 className="text-3xl font-normal">Sign In</h2>
               </div>
@@ -48,9 +48,12 @@ function SignIn() {
                 <label className=" font-bold text-sm">Email</label>
                 <input
                   className="w-full text-slate-600 text-sm py-1 focus:border-orange-600 focus:shadow-input-focus px-2 border border-gray-400 rounded outline-none "
-                  id="email"
+                  value={email}
+                  onChange={(event) => setEmail(event.target.value)}
+                  name="email"
+                  id="loginEmail"
                   type="email"
-                  ref={emailRef}
+                  
                   required
                 />
               </div>
@@ -66,9 +69,11 @@ function SignIn() {
 
                 <input
                   className="w-full  text-slate-600 text-sm py-1 focus:border-amber-400 focus:border-2 px-2 border border-gray-400 rounded outline-none "
-                  id="password"
                   type="password"
-                  ref={passwordRef}
+                  name="password"
+                  value={password}
+                  onChange={(event) => setPassword(event.target.value)}
+                  id="loginPassword"
                   required
                 />
               </div>
@@ -83,7 +88,7 @@ function SignIn() {
                 </button> */}
                 <Button
                   label="Sign-In"
-                  disabledName={loading}
+                 
                   varient={btnvarient.primary}
                 />
                 {console.log(btnvarient)}
