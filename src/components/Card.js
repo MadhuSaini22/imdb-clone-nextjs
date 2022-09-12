@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
-import { Link } from "react-router-dom";
-import { IMAGE_PATH } from "../../Config";
+import { SEARCH_IMG } from "../../Config";
+import Link from "next/link";
 
 const Card = ({ movie }) => {
   const [isLoading, setIsLoading] = useState(true);
@@ -21,29 +21,31 @@ const Card = ({ movie }) => {
           </SkeletonTheme>
         </div>
       ) : (
-       
-          <div className="!inline-block transition duration-300 ease-in-out relative rounded overflow-hidden cursor-pointer z-0  ">
-            <img
-              className=" "
-              src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
-              alt="img"
-            />
-            <div className=" absolute p-3 bottom-0 h-72 flex flex-col w-10/12 justify-end opacity-0 hover:opacity-100">
-              <div className=" text-base font-black mb-1.5">
-                {movie.original_title}
-              </div>
-              <div className=" text-xs m-1">
-                {movie.release_date}
-                <span className="float-right">
-                  {movie.vote_average} <i className="fas fa-star"></i>{" "}
-                </span>
-              </div>
-              <div className="truncate">
-                {movie.overview.slice(0, 118) + "..."}
+        <Link href={`/movieDetail/${movie.id}`}>
+          <a className="flex justify-center items-center">
+            <div className="!inline-block transition duration-300 ease-in-out relative rounded overflow-hidden cursor-pointer z-0  ">
+              <img
+                className=" "
+                src={`${SEARCH_IMG}/original/${movie.poster_path}`}
+                alt="img"
+              />
+              <div className=" absolute p-3 bottom-0 h-72 flex flex-col w-10/12 justify-end opacity-0 hover:opacity-100">
+                <div className=" text-base font-black mb-1.5">
+                  {movie.original_title}
+                </div>
+                <div className=" text-xs m-1">
+                  {movie.release_date}
+                  <span className="float-right">
+                    {movie.vote_average} <i className="fas fa-star"></i>{" "}
+                  </span>
+                </div>
+                <div className="truncate">
+                  {movie.overview.slice(0, 118) + "..."}
+                </div>
               </div>
             </div>
-          </div>
-       
+          </a>
+        </Link>
       )}
     </>
   );

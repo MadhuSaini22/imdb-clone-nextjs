@@ -1,13 +1,24 @@
 import React, { useContext } from "react";
 import { useRouter } from "next/router";
+import { GlobalContext } from "../../contexts/GlobalState";
 // import { Link, useNavigate } from "react-router-dom";
 import Link from "next/link";
-import { IMAGE_PATH } from "../../../Config";
+import { useAuth } from "../../contexts/AuthUserProvider";
+import { IMAGE_PATH, SEARCH_IMG } from "../../../Config";
 export const AddWatch = ({ movie }) => {
   const router = useRouter();
 
-  const currentUser = "simran";
-  const watchlistDisabled = true;
+  const { authUser } = useAuth();
+  const { addMovieToWatchlist, watchlist, watched } = useContext(GlobalContext);
+
+  let storedMovie = watchlist.find((o) => o.id === movie.id);
+  let storedMovieWatched = watched.find((o) => o.id === movie.id);
+
+  const watchlistDisabled = storedMovie
+    ? true
+    : storedMovieWatched
+    ? true
+    : false;
   return (
     <div>
       <div className="relative group ">
@@ -15,15 +26,20 @@ export const AddWatch = ({ movie }) => {
           <a>
             <img
               className="m-auto block group-hover:opacity-90"
-              src={`https://image.tmdb.org/t/p/original/${
-                movie ? movie.backdrop_path : ""
-              }`}
+              src={`${SEARCH_IMG}/original/${movie ? movie.backdrop_path : ""}`}
               alt="img"
-            />{" "}
+            />
           </a>
         </Link>
-        <button className="z-[9]">
-          {currentUser ? (
+        <button
+          className="z-[9]"
+          disabled={watchlistDisabled}
+          onClick={() => {
+            if (authUser) addMovieToWatchlist(movie);
+            else router.push("/signIn");
+          }}
+        >
+          {authUser ? (
             <div>
               {watchlistDisabled == false ? (
                 <svg

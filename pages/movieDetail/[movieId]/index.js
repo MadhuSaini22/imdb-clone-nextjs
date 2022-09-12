@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import { IMAGE_END, IMAGE_PATH } from "../../../Config";
+import {
+  IMAGE_END,
+  IMAGE_PATH,TMDB_KEY,
+  SEARCH_IMG,
+  IMAGE_START,
+} from "../../../Config";
 function MovieDetail() {
   const [currentMovieDetail, setMovie] = useState();
   const router = useRouter();
@@ -12,21 +17,19 @@ function MovieDetail() {
   }, []);
 
   const getData = () => {
-    fetch(
-      `https://api.themoviedb.org/3/movie/${movieId}?api_key=4e44d9029b1270a757cddc766a1bcb63&language=en-US`
-    )
+    fetch(`${IMAGE_START}/${movieId}?api_key=${TMDB_KEY}&${IMAGE_END}`)
       .then((res) => res.json())
       .then((data) => setMovie(data));
   };
   console.log(currentMovieDetail, "currentMovie");
-  
+
   return (
     <div className="max-w-container m-auto ">
       <div className="w-full relative flex flex-col justify-center items-center">
         <div className=" justify-center items-center w-11/12">
           <img
             className=" object-cover  justify-center items-center  w-full h-500"
-            src={` https://image.tmdb.org/t/p/original/${
+            src={` ${SEARCH_IMG}/original/${
               currentMovieDetail ? currentMovieDetail.backdrop_path : ""
             }`}
             alt="img"
@@ -37,7 +40,7 @@ function MovieDetail() {
             <div>
               <img
                 className="w-80 rounded-lg  "
-                src={`https://image.tmdb.org/t/p/original/${
+                src={`${SEARCH_IMG}/original/${
                   currentMovieDetail ? currentMovieDetail.poster_path : ""
                 }`}
                 alt="img"
@@ -146,10 +149,7 @@ function MovieDetail() {
                   <span className="flex flex-col items-center justify-center">
                     <img
                       className="w-52 m-6"
-                      src={
-                        `https://image.tmdb.org/t/p/original` +
-                        company.logo_path
-                      }
+                      src={`${SEARCH_IMG}/original` + company.logo_path}
                       alt="img"
                     />
                     <span>{company.name}</span>

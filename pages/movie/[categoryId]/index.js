@@ -4,11 +4,10 @@ const multiselectRef = React.createRef();
 import Card from "../../../src/components/Card";
 import Multiselect from "multiselect-react-dropdown";
 import Heading from "../../../src/components/Heading";
-import { IMAGE_END } from "../../../Config";
+import { IMAGE_END, TMDB_KEY, IMAGE_START } from "../../../Config";
 function Category() {
   const router = useRouter();
   const categoryId = router.query.categoryId;
-  console.log(categoryId, "counterewdqwd");
 
   const [movieList, setMovieList] = useState([]);
   const [selected, setSelected] = useState([]);
@@ -23,9 +22,9 @@ function Category() {
 
   const getData = () => {
     fetch(
-      `    https://api.themoviedb.org/3/movie/${
+      `    ${IMAGE_START}/${
         categoryId ? categoryId : "popular"
-      }?api_key=4e44d9029b1270a757cddc766a1bcb63&${IMAGE_END}`
+      }?api_key=${TMDB_KEY}&${IMAGE_END}`
     )
       .then((res) => res.json())
       .then((data) => setMovieList(data.results));
@@ -91,7 +90,9 @@ function Category() {
       <div className="px-3 min-h-screen">
         <div className="flex lg:flex-row md:flex-row   justify-between items-center  sm:flex-row flex-col text-black  ">
           <div className="justify-center flex py-2 items-center">
-            <Heading heading={`${(categoryId ? categoryId : "POPULAR").toUpperCase()}`} />
+            <Heading
+              heading={`${(categoryId ? categoryId : "POPULAR").toUpperCase()}`}
+            />
           </div>
           <div className="py-2  ">
             <Multiselect
@@ -121,7 +122,10 @@ function Category() {
             <div className="grid gap-5 lg:grid-cols-6 md:grid-cols-3 sm:grid-cols-3 grid-cols-2 ">
               {arr.map((index) => {
                 return (
-                  <div key={index} className="rounded bg-slate-200 h-64 !w-48"></div>
+                  <div
+                    key={index}
+                    className="rounded bg-slate-200 h-64 !w-48"
+                  ></div>
                 );
               })}
             </div>

@@ -1,39 +1,34 @@
 import React, { useContext, useState, useEffect } from "react";
 import { MovieCard } from "../src/components/MovieCard";
-import { useRouter } from 'next/router';
-import { useAuth } from '../src/contexts/AuthUserProvider';
+import { useRouter } from "next/router";
+import { GlobalContext } from "../src/contexts/GlobalState";
 const Watchlist = () => {
   const [data, setData] = useState([]);
   const [sortType, setSortType] = useState("popularity");
-  const { authUser, loading } = useAuth();
-  const router = useRouter();
+  const { watchlist } = useContext(GlobalContext);
 
-  // Listen for changes on loading and authUser, redirect if needed
   useEffect(() => {
-    if (!loading && !authUser)
-      router.push('/')
-  }, [authUser, loading])
-  // useEffect(() => {
-  //   const sortArray = (type) => {
-  //     const types = {
-  //       vote_count: "vote_count",
-  //       title: "title",
-  //       vote_average: "vote_average",
-  //       release_date: "release_date",
-  //       popularity: "popularity",
-  //     };
-  //     const sortProperty = types[type];
-  //     const sorted = [...watchlist].sort(
-  //       (a, b) => b[sortProperty] - a[sortProperty]
-  //     );
-  //     setData(sorted);
-  //   };
+    const sortArray = (type) => {
+      const types = {
+        vote_count: "vote_count",
+        title: "title",
+        vote_average: "vote_average",
+        release_date: "release_date",
+        popularity: "popularity",
+      };
+      const sortProperty = types[type];
+      const sorted = [...watchlist].sort(
+        (a, b) => b[sortProperty] - a[sortProperty]
+      );
+      setData(sorted);
+    };
 
-  //   sortArray(sortType);
-  // }, [sortType, watchlist]);
+    sortArray(sortType);
+  }, [sortType, watchlist]);
 
   return (
     <div className="min-h-screen justify-center flex">
+       {watchlist.length > 0 ? (
       <div className="container  justify-center font-coverFont flex">
         <div className="max-w-5xl">
           <div className="lg:grid  lg:grid-cols-5 lg:gap-1 md:grid  md:grid-cols-5 md:gap-1 sm:grid  sm:grid-cols-5 sm:gap-1">
@@ -64,7 +59,11 @@ const Watchlist = () => {
               <div className=" border-t border-slate-300"></div>
               <div className="text-gray-600 flex py-4 text-sm justify-between pl-5 pr-4">
                 <div>
-                  <span className=""></span>
+                  <span className="">
+                    {" "}
+                    {watchlist.length}
+                    {watchlist.length === 1 ? " Tile" : " Tiles"}
+                  </span>
                 </div>
 
                 <div>
@@ -88,7 +87,28 @@ const Watchlist = () => {
                 </div>
               </div>
               <div className="border-t border-slate-300"></div>
-              <div className=" bg-white py-1"></div>
+              <div className=" bg-white py-1">
+                {" "}
+                {data && data.length > 0
+                  ? data.map((movie) => (
+                      <div key={movie.id}>
+                        <MovieCard
+                          movie={movie}
+                          key={movie.id}
+                          type="watchlist"
+                        />
+                      </div>
+                    ))
+                  : watchlist.map((movie) => (
+                      <div key={movie.id}>
+                        <MovieCard
+                          movie={movie}
+                          key={movie.id}
+                          type="watchlist"
+                        />
+                      </div>
+                    ))}{" "}
+              </div>
             </div>
             <div className=" text-black col-span-2 px-3  bg-gray-100">
               <div className=" pt-3 font-semibold font-sans text-lg ">
@@ -108,7 +128,9 @@ const Watchlist = () => {
             </div>
           </div>
         </div>
-      </div>
+      </div> ) : (
+        <h2 className="">No movies in your list! Add some!</h2>
+      )}
     </div>
   );
 };

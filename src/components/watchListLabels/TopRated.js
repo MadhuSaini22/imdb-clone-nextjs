@@ -1,10 +1,20 @@
 import React, { useContext } from "react";
-import { IMAGE_PATH } from "../../../Config";
+import { IMAGE_PATH, SEARCH_IMG } from "../../../Config";
 import Link from "next/link";
-
+import { GlobalContext } from "../../contexts/GlobalState";
+import { useAuth } from "../../contexts/AuthUserProvider";
 export const TopRated = ({ movie }) => {
-  const currentUser = "simran";
-  const watchlistDisabled = true;
+  const { authUser } = useAuth();
+  const { addMovieToWatchlist, watchlist, watched } = useContext(GlobalContext);
+
+  let storedMovie = watchlist.find((o) => o.id === movie.id);
+  let storedMovieWatched = watched.find((o) => o.id === movie.id);
+
+  const watchlistDisabled = storedMovie
+    ? true
+    : storedMovieWatched
+    ? true
+    : false;
   return (
     <div>
       <div className=" hover:opacity-90 flex-col relative rounded overflow-hidden cursor-pointer  ">
@@ -13,16 +23,23 @@ export const TopRated = ({ movie }) => {
             <a>
               <img
                 className=""
-                src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
+                src={`${SEARCH_IMG}/original/${movie.poster_path}`}
                 alt="img"
               />
             </a>
           </Link>
           {/* { console.log(watchlistDisabled)} */}
-          <button className="z-[9]">
-            {currentUser ? (
+          <button
+            className="z-[9]"
+            disabled={watchlistDisabled}
+            onClick={() => {
+              if (authUser) addMovieToWatchlist(movie);
+              else router.push("/signIn");
+            }}
+          >
+            {authUser ? (
               <div>
-                {watchlistDisabled && watchlistDisabled == false ? (
+                {watchlistDisabled == false ? (
                   <svg
                     className="ipc-watchlist-ribbon__bg h-12 w-11 absolute overflow-hidden top-0 left-0 text-3xl  "
                     width="27px"
@@ -150,7 +167,7 @@ export const TopRated = ({ movie }) => {
                 {movie.overview.slice(0, 118) + "..."}
               </div>
             </div>
-          </a> 
+          </a>
         </Link>
       </div>
     </div>

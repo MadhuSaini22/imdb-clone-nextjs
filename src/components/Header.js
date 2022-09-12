@@ -1,42 +1,46 @@
-import React, { useState,useEffect, useContext } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
 import { MenuIcon } from "@heroicons/react/outline";
 import { ResultCard } from "./ResultCard";
-import { IMAGE_END, TMDB_KEY } from "../../Config";
+import { IMAGE_END, TMDB_KEY ,IMAGE_START} from "../../Config";
+import { GlobalContext } from "../contexts/GlobalState";
 import Link from "next/link";
-import { useRouter } from 'next/router';
-import { useAuth } from '../contexts/AuthUserProvider';
-
+import { useRouter } from "next/router";
+import { useAuth } from "../contexts/AuthUserProvider";
 
 const Header = () => {
+  const timeout = useRef();
   const { authUser, loading, signOut } = useAuth();
+  // console.log(authUser,"autrh")
+  const { watchlist } = useContext(GlobalContext);
   const router = useRouter();
   useEffect(() => {
-    if (!loading && !authUser)
-      router.push('/signIn')
-  }, [authUser, loading])
+    if (!loading && !authUser) router.push("/signIn");
+  }, [authUser, loading]);
 
   const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
   const [menu, setMenu] = useState(false);
 
-  const currentUser = "simran";
-  const watchlistDisabled = true;
   const onChange = (e) => {
     e.preventDefault();
 
     setQuery(e.target.value);
-
-    fetch(
-      `https://api.themoviedb.org/3/search/movie?api_key=4e44d9029b1270a757cddc766a1bcb63&${IMAGE_END}&page=1&include_adult=false&query=${e.target.value}`
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        if (!data.errors) {
-          setResults(data.results.slice(0, 8));
-        } else {
-          setResults([]);
-        }
-      });
+    //Clear the previous timeout.
+    clearTimeout(timeout.current);
+    timeout.current = setTimeout(() => {
+      fetch(
+        `https://api.themoviedb.org/3/search/movie?api_key=${TMDB_KEY}&${IMAGE_END}&page=1&include_adult=false&query=${e.target.value}`
+      )
+        .then((res) => res.json())
+        .then((data) => {
+          if (!data.errors) {
+            console.log("setting results");
+            setResults(data.results.slice(0, 8));
+          } else {
+            setResults([]);
+          }
+        });
+    }, 400);
   };
 
   const [error, setError] = useState("");
@@ -70,7 +74,7 @@ const Header = () => {
         </Link>
       </div>
       {menu == true ? (
-        <div className="bg-dark-lightBlack justify-center flex h-full w-full myclass fixed z-[2] inset-0 pt-20">
+        <div className="bg-dark-lightBlack justify-center flex h-full w-full myclass fixed z-20 inset-0 pt-20">
           <div className="lg:w-2/4 mt-5 lg:px-0 px-4">
             <div className="flex mt-2 justify-between">
               <div className="   justify-center ">
@@ -288,7 +292,7 @@ const Header = () => {
       </div>
 
       <div className="">
-        <Link href="/signInCover">
+        <Link href="/watchlist">
           <a>
             <div className=" hover:bg-slate-800 py-2 px-2  lg:px-3 rounded align-middle justify-center flex">
               <svg
@@ -308,7 +312,16 @@ const Header = () => {
                 ></path>
               </svg>
               <div>
-                <span className="text-sm font-semibold ">Watchlist</span>
+                <span className="text-sm font-semibold ">
+                  Watchlist
+                  {authUser ? (
+                    <span className="m-1 bg-yellow-500 px-2 text-black rounded-xl">
+                      {watchlist.length}
+                    </span>
+                  ) : (
+                    ""
+                  )}
+                </span>
               </div>
             </div>
           </a>
@@ -318,7 +331,9 @@ const Header = () => {
         <a>
           <div className=" hover:bg-slate-800 py-2 px-2  rounded align-middle justify-center flex ">
             {authUser ? (
-              <span className="text-sm font-semibold " onClick={signOut}>Log Out</span>
+              <span className="text-sm font-semibold " onClick={signOut}>
+                Log Out
+              </span>
             ) : (
               <span className="text-sm font-semibold ">Sign In </span>
             )}
@@ -330,3 +345,4 @@ const Header = () => {
 };
 
 export default Header;
+ 

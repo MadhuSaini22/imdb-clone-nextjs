@@ -7,11 +7,12 @@ import "swiper/css/navigation";
 import "swiper/css/effect-fade";
 import Link from "next/link";
 import { TopRated } from "./watchListLabels/TopRated";
-import { IMAGE_PATH } from "../../Config";
-import { ChevronRightIcon, ChevronLeftIcon } from "@heroicons/react/outline";
+import { IMAGE_PATH, SEARCH_IMG } from "../../Config";
+import { ChevronRightIcon, ChevronLeftIcon } from "@heroicons/react/solid";
+
 function Slider({ movies, type }) {
   const [swiperRef, setSwiperRef] = useState();
-  console.log(movies, "movies in swiper");
+  // console.log(movies, "movies in swiper");
   const handleLeftClick = useCallback(() => {
     if (!swiperRef) return;
     swiperRef.slidePrev();
@@ -23,13 +24,17 @@ function Slider({ movies, type }) {
   }, [swiperRef]);
 
   return (
-    <div>
-      <div className="leftarrow font-bold !bg-pink "> 
-        <button onClick={handleLeftClick}>button
-          <ChevronLeftIcon  />
+    <div className="relative">
+      <div className="leftarrow font-bold !bg-pink ">
+        <button
+          onClick={handleLeftClick}
+          className="absolute -left-6 z-10 bg-black/30 2xl:visible xl:!visible !invisible -translate-y-1/2 border px-1 py-3 rounded top-1/2 text-white  hover:!text-amber-400"
+        >
+          <ChevronLeftIcon className="w-11 h-11 flex !font-bold" />
         </button>
       </div>
       <Swiper
+        onSwiper={setSwiperRef}
         slidesPerView={6}
         spaceBetween={20}
         slidesPerGroup={6}
@@ -79,7 +84,7 @@ function Slider({ movies, type }) {
                     <div className="">
                       <img
                         className=""
-                        src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
+                        src={`${SEARCH_IMG}/original/${movie.poster_path}`}
                         alt="img"
                       />
                     </div>
@@ -98,9 +103,12 @@ function Slider({ movies, type }) {
           </SwiperSlide>
         ))}
       </Swiper>
-      <div className="leftarrow font-bold !bg-pink "> 
-        <button onClick={handleLeftClick}>button
-          <ChevronRightIcon />
+      <div className="leftarrow font-bold !bg-pink ">
+        <button
+          onClick={handleRightClick}
+          className="absolute -right-6 z-10 bg-black/30 2xl:visible xl:!visible !invisible -translate-y-1/2 border px-1 py-3 rounded top-1/2 text-white  hover:!text-amber-400"
+        >
+          <ChevronRightIcon className="w-11 h-11 flex !font-bold" />
         </button>
       </div>
     </div>

@@ -3,7 +3,7 @@ import Card from "./Card";
 import { useParams } from "react-router-dom";
 import Multiselect from "multiselect-react-dropdown";
 import Heading from "./Heading";
-import { IMAGE_END } from "../../Config";
+import { IMAGE_END, IMAGE_START, TMDB_KEY } from "../../Config";
 
 const multiselectRef = React.createRef();
 const MovieList = () => {
@@ -21,9 +21,9 @@ const MovieList = () => {
 
   const getData = () => {
     fetch(
-      `    https://api.themoviedb.org/3/movie/${
+      `    ${IMAGE_START}/${
         type ? type : "popular"
-      }?api_key=4e44d9029b1270a757cddc766a1bcb63&${IMAGE_END}`
+      }?api_key=${TMDB_KEY}&${IMAGE_END}`
     )
       .then((res) => res.json())
       .then((data) => setMovieList(data.results));
@@ -119,7 +119,11 @@ const MovieList = () => {
             <div className="grid gap-5 lg:grid-cols-6 md:grid-cols-3 sm:grid-cols-3 grid-cols-2 ">
               {arr.map((index) => {
                 return (
-                  <div key={index} id={index} className="rounded bg-slate-200 h-64 !w-48"></div>
+                  <div
+                    key={index}
+                    id={index}
+                    className="rounded bg-slate-200 h-64 !w-48"
+                  ></div>
                 );
               })}
             </div>

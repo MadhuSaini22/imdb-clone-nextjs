@@ -1,6 +1,5 @@
-import React, { useState,useEffect, useRef } from "react";
+import React, { useState } from "react";
 import { btnvarient } from "../src/staticValues";
-import { Link, useNavigate } from "react-router-dom";
 import Button from "../src/components/Button";
 import { useRouter } from 'next/router';
 import { useAuth } from '../src/contexts/AuthUserProvider';
@@ -26,11 +25,14 @@ function SignIn() {
 
 
   return (
+
     <div className=" h-screen bg-white">
+   
       <div className="max-w-container m-auto bg-white">
         <div className=" w-full justify-items-center  font-sans p-2">
           <div className=" mb-5  mt-2 grid  justify-center ">
-            <img
+        
+           <img
               className=" h-14"
               src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/IMDB_Logo_2016.svg/2560px-IMDB_Logo_2016.svg.png"
               alt="img"
