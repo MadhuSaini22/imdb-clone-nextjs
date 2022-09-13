@@ -1,7 +1,8 @@
+/* eslint-disable @next/next/no-img-element */
 import React, { useState, useEffect, useRef, useContext } from "react";
 import { MenuIcon } from "@heroicons/react/outline";
 import { ResultCard } from "./ResultCard";
-import { IMAGE_END, TMDB_KEY ,IMAGE_START} from "../../Config";
+import { IMAGE_END, TMDB_KEY, IMAGE_START } from "../../Config";
 import { GlobalContext } from "../contexts/GlobalState";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -15,7 +16,7 @@ const Header = () => {
   const router = useRouter();
   useEffect(() => {
     if (!loading && !authUser) router.push("/signIn");
-  }, [authUser, loading]);
+  }, [authUser, router, loading]);
 
   const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
@@ -345,4 +346,3 @@ const Header = () => {
 };
 
 export default Header;
- 

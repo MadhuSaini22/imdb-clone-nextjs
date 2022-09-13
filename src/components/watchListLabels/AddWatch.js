@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import React, { useContext } from "react";
 import { useRouter } from "next/router";
 import { GlobalContext } from "../../contexts/GlobalState";
@@ -24,6 +25,7 @@ export const AddWatch = ({ movie }) => {
       <div className="relative group ">
         <Link href={`/movieDetail/${movie.id}`}>
           <a>
+           
             <img
               className="m-auto block group-hover:opacity-90"
               src={`${SEARCH_IMG}/original/${movie ? movie.backdrop_path : ""}`}

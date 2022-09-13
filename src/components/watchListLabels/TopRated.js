@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import React, { useContext } from "react";
 import { IMAGE_PATH, SEARCH_IMG } from "../../../Config";
 import Link from "next/link";

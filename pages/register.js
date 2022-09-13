@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import React, { useRef, useState } from "react";
 import { useAuth } from "../src/contexts/AuthUserProvider";
 import { useRouter } from "next/router";

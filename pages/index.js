@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import React, { useEffect, useState } from "react";
 import loader from "../src/assets/1544764567.svg";
 import Image from "next/image";
