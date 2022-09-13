@@ -37,18 +37,14 @@ function Register() {
         <div className="max-w-container m-auto bg-white">
           <div className=" w-full justify-items-center  font-sans p-2">
             <div className=" mb-5  mt-2 grid  justify-center ">
-              <img
-                className=" h-14"
-                src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/IMDB_Logo_2016.svg/2560px-IMDB_Logo_2016.svg.png"
-                alt="img"
-              />
-              {/* <Image
+              
+              <Image
                 className=" h-14"
                 src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/IMDB_Logo_2016.svg/2560px-IMDB_Logo_2016.svg.png"
                 alt="img"
                 height="56px"
-                width="100%"
-              /> */}
+                width="111px"
+              />
             </div>
             {/* <p className="text-black"> hello {error}</p> */}
             {console.log(JSON.stringify(error))}

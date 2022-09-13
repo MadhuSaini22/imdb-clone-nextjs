@@ -83,11 +83,14 @@ const Header = () => {
               <div className="   justify-center ">
                 <Link href="/">
                   <a>
-                    <img
+                    <Image
                       className=" h-12"
                       src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/IMDB_Logo_2016.svg/2560px-IMDB_Logo_2016.svg.png"
                       alt="img"
+                      width="95px"
+                      height="48px"
                     />
+                   
                   </a>
                 </Link>
               </div>

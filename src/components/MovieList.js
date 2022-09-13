@@ -12,22 +12,18 @@ const MovieList = () => {
   const [selected, setSelected] = useState([]);
   const [data, setData] = useState([]);
   useEffect(() => {
-    getData();
-  }, []);
-
-  useEffect(() => {
+    const getData = () => {
+      fetch(
+        `    ${IMAGE_START}/${
+          type ? type : "popular"
+        }?api_key=${TMDB_KEY}&${IMAGE_END}`
+      )
+        .then((res) => res.json())
+        .then((data) => setMovieList(data.results));
+    };
     getData();
   }, [type]);
 
-  const getData = () => {
-    fetch(
-      `    ${IMAGE_START}/${
-        type ? type : "popular"
-      }?api_key=${TMDB_KEY}&${IMAGE_END}`
-    )
-      .then((res) => res.json())
-      .then((data) => setMovieList(data.results));
-  };
   // console.log(selected);
   const genres = [
     { id: 28, value: "Action" },

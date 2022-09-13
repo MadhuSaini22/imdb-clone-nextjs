@@ -1,9 +1,9 @@
-/* eslint-disable @next/next/no-img-element */
 import React, { useState } from "react";
 import { btnvarient } from "../src/staticValues";
 import Button from "../src/components/Button";
 import { useRouter } from 'next/router';
 import { useAuth } from '../src/contexts/AuthUserProvider';
+import Image from "next/image";
 function SignIn() {
 
   const [email, setEmail] = useState("");
@@ -33,11 +33,13 @@ function SignIn() {
         <div className=" w-full justify-items-center  font-sans p-2">
           <div className=" mb-5  mt-2 grid  justify-center ">
         
-           <img
-              className=" h-14"
-              src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/IMDB_Logo_2016.svg/2560px-IMDB_Logo_2016.svg.png"
-              alt="img"
-            />
+          <Image
+                className=" h-14"
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/IMDB_Logo_2016.svg/2560px-IMDB_Logo_2016.svg.png"
+                alt="img"
+                height="56px"
+                width="111px"
+              />
           </div>
           {console.log(JSON.stringify(error))}
           {error && alert(JSON.stringify(error))}

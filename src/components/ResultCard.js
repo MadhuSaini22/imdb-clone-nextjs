@@ -2,6 +2,7 @@ import React from "react";
 import Moment from "react-moment";
 import Link from "next/link";
 import { SEARCH_IMG } from "../../Config";
+import Image from "next/image";
 export const ResultCard = ({ movie }) => {
   return (
     <Link href={`/movieDetail/${movie.id}`}>
@@ -9,10 +10,12 @@ export const ResultCard = ({ movie }) => {
         <div className="grid grid-cols-12 gap-2  border-t border-gray-500">
           <div className="col-span-1 p-2">
             {movie.poster_path ? (
-              <img
+              <Image
                 className="max-w-100"
                 src={`${SEARCH_IMG}/w200${movie.poster_path}`}
                 alt={`${movie.title} Poster`}
+                width="50px"
+                height="75px"
               />
             ) : (
               <div className="" />

@@ -9,6 +9,7 @@ import Link from "next/link";
 import { TopRated } from "./watchListLabels/TopRated";
 import { IMAGE_PATH, SEARCH_IMG } from "../../Config";
 import { ChevronRightIcon, ChevronLeftIcon } from "@heroicons/react/solid";
+import Image from "next/image";
 
 function Slider({ movies, type }) {
   const [swiperRef, setSwiperRef] = useState();
@@ -82,11 +83,14 @@ function Slider({ movies, type }) {
                 <a>
                   <div className="flex hover:opacity-90 flex-col">
                     <div className="">
-                      <img
+                      <Image
                         className=""
                         src={`${SEARCH_IMG}/original/${movie.poster_path}`}
                         alt="img"
+                        width="250px"
+                        height="397px"
                       />
+                     
                     </div>
 
                     <div className="">
