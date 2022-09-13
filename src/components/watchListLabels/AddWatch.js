@@ -1,11 +1,10 @@
-/* eslint-disable @next/next/no-img-element */
 import React, { useContext } from "react";
 import { useRouter } from "next/router";
 import { GlobalContext } from "../../contexts/GlobalState";
-// import { Link, useNavigate } from "react-router-dom";
 import Link from "next/link";
 import { useAuth } from "../../contexts/AuthUserProvider";
 import { IMAGE_PATH, SEARCH_IMG } from "../../../Config";
+import Image from "next/image";
 export const AddWatch = ({ movie }) => {
   const router = useRouter();
 
@@ -25,11 +24,12 @@ export const AddWatch = ({ movie }) => {
       <div className="relative group ">
         <Link href={`/movieDetail/${movie.id}`}>
           <a>
-           
-            <img
+            <Image
               className="m-auto block group-hover:opacity-90"
               src={`${SEARCH_IMG}/original/${movie ? movie.backdrop_path : ""}`}
               alt="img"
+              width="2435"
+              height="1370"
             />
           </a>
         </Link>

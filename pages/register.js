@@ -2,6 +2,7 @@
 import React, { useRef, useState } from "react";
 import { useAuth } from "../src/contexts/AuthUserProvider";
 import { useRouter } from "next/router";
+import Image from "next/image";
 
 function Register() {
   const [email, setEmail] = useState("");
@@ -41,6 +42,13 @@ function Register() {
                 src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/IMDB_Logo_2016.svg/2560px-IMDB_Logo_2016.svg.png"
                 alt="img"
               />
+              {/* <Image
+                className=" h-14"
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/IMDB_Logo_2016.svg/2560px-IMDB_Logo_2016.svg.png"
+                alt="img"
+                height="56px"
+                width="100%"
+              /> */}
             </div>
             {/* <p className="text-black"> hello {error}</p> */}
             {console.log(JSON.stringify(error))}

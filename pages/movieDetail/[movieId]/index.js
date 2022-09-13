@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 import React from "react";
 import { useRouter } from "next/router";
 import {
@@ -8,7 +7,7 @@ import {
   SEARCH_IMG,
   IMAGE_START,
 } from "../../../Config";
-
+import Image from "next/image";
 
 function MovieDetail(props) {
   const router = useRouter();
@@ -21,24 +20,28 @@ function MovieDetail(props) {
 
   return (
     <div className="max-w-container m-auto ">
-      <div className="w-full relative flex flex-col justify-center items-center">
-        <div className=" justify-center items-center w-11/12">
-          <img
-            className=" object-cover  justify-center items-center  w-full h-500"
+      <div className="w-full relative flex flex-col justify-center group  items-center">
+        <div className=" justify-center group-hover:opacity-75 items-center w-11/12">
+          <Image
+            className=" object-cover  justify-center items-center   "
             src={` ${SEARCH_IMG}/original/${
               currentMovieDetail ? currentMovieDetail.backdrop_path : ""
             }`}
+            height="700px"
+            width="1200"
             alt="img"
           />
         </div>
         <div className=" w-11/12 lg:w-9/12 flex justify-center items-center top-24 lg:absolute md:absolute sm:absolute">
           <div className="lg:block md:block sm:block hidden mr-8  ">
             <div>
-              <img
+              <Image
                 className="w-80 rounded-lg  "
                 src={`${SEARCH_IMG}/original/${
                   currentMovieDetail ? currentMovieDetail.poster_path : ""
                 }`}
+                width="320px"
+                height="420px"
                 alt="img"
               />
             </div>
@@ -68,18 +71,13 @@ function MovieDetail(props) {
                   ? "Release date: " + currentMovieDetail.release_date
                   : ""}
               </div>
-              <div className="mt-5 flex lg:flex-row md:flex-row  sm:flex-row  flex-col">
+              <div className="grid grid-cols-2 mt-3  sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 ">
                 {currentMovieDetail && currentMovieDetail.genres
                   ? currentMovieDetail.genres.map((genre) => (
-                      <div key={genre.id}>
-                        <div className="mt-8">
-                          <span
-                            className="p-3  lg:mt-0  m-5 border-2 border-white rounded-3xl mr-1"
-                            id={genre.id}
-                          >
-                            {genre.name}
-                          </span>
-                        </div>
+                      <div key={genre.id}  className="text-center border-2 border-white p-3 rounded-full">
+                         
+                          {genre.name}
+                         
                       </div>
                     ))
                   : ""}
@@ -95,9 +93,9 @@ function MovieDetail(props) {
             </div>
           </div>
         </div>
-        <div className=" flex justify-center items-center   lg:flex-row flex-col  mt-5">
+        <div className=" flex justify-center items-center  flex-col  mt-5">
           <div className="lg:text-3xl text-2xl mt-2">Useful Links</div>
-          <div className="flex  flex-row  ">
+          <div className="flex  flex-row pt-2 ">
             <div className="justify-center items-center  mt-2 flex">
               {currentMovieDetail && currentMovieDetail.homepage && (
                 <a
@@ -136,20 +134,25 @@ function MovieDetail(props) {
           </div>
         </div>
         <div className=" lg:text-3xl text-2xl mt-5">Production companies</div>
-        <div className=" w-10/12 flex justify-center items-end mb-5">
+        <div className="grid grid-cols-2 pt-3 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 mb-5">
           {currentMovieDetail &&
             currentMovieDetail.production_companies &&
             currentMovieDetail.production_companies.map((company) => (
-              <div key={company.logo_path}>
+              <div className="" key={company.logo_path}>
                 {company.logo_path && (
-                  <span className="flex flex-col items-center justify-center">
-                    <img
-                      className="w-52 m-6"
-                      src={`${SEARCH_IMG}/original` + company.logo_path}
-                      alt="img"
-                    />
-                    <span>{company.name}</span>
-                  </span>
+                  <div className="text-center bg-gray-300 p-4 rounded space-y-4">
+                    <div className="h-12">
+                      <Image
+                        className="!w-auto !min-w-[auto] !max-h-12"
+                        src={`${SEARCH_IMG}/original` + company.logo_path}
+                        alt="img"
+                        height="50"
+                        width="200"
+                        layout="responsive"
+                      />
+                    </div>
+                    <div className="text-black font-medium">{company.name}</div>
+                  </div>
                 )}
               </div>
             ))}

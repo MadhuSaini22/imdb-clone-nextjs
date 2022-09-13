@@ -2,17 +2,21 @@ import React from "react";
 import { MovieControls } from "./MovieControls";
 import Moment from "react-moment";
 import { SEARCH_IMG } from "../../Config";
+import Image from "next/image";
 export const MovieCard = ({ movie, type }) => {
   return (
     <div>
       <div className="relative  grid grid-cols-5 gap-2 text-dark-forgot border-b m-4 border-gray-500">
         <div className=" col-span-1 p-1">
           {movie.poster_path ? (
-            <img
+            <Image
               className=""
               src={`${SEARCH_IMG}/w200${movie.poster_path}`}
               alt={`${movie.title} Poster`}
+              width="101px"
+              height="152px"
             />
+           
           ) : (
             <div className="" />
           )}

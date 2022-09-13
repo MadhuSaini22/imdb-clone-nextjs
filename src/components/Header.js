@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 import React, { useState, useEffect, useRef, useContext } from "react";
 import { MenuIcon } from "@heroicons/react/outline";
 import { ResultCard } from "./ResultCard";
@@ -7,6 +6,7 @@ import { GlobalContext } from "../contexts/GlobalState";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useAuth } from "../contexts/AuthUserProvider";
+import Image from "next/image";
 
 const Header = () => {
   const timeout = useRef();
@@ -50,11 +50,13 @@ const Header = () => {
     <div className="flex px-2 justify-center items-center py-1 space-x-2">
       <div className="flex space-x-2 items-center">
         <Link href="/">
-          <a>
-            <img
+          <a className="flex justify-center items-center">
+            <Image
               className="  h-8"
               src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/IMDB_Logo_2016.svg/2560px-IMDB_Logo_2016.svg.png"
               alt="img"
+              height="31px"
+              width="63px"
             />
           </a>
         </Link>

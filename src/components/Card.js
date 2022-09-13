@@ -1,8 +1,8 @@
-/* eslint-disable @next/next/no-img-element */
 import React, { useEffect, useState } from "react";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import { SEARCH_IMG } from "../../Config";
 import Link from "next/link";
+import Image from "next/image";
 
 const Card = ({ movie }) => {
   const [isLoading, setIsLoading] = useState(true);
@@ -25,10 +25,13 @@ const Card = ({ movie }) => {
         <Link href={`/movieDetail/${movie.id}`}>
           <a className="flex justify-center items-center">
             <div className="!inline-block transition duration-300 ease-in-out relative rounded overflow-hidden cursor-pointer z-0  ">
-              <img
+              <Image
                 className=" "
                 src={`${SEARCH_IMG}/original/${movie.poster_path}`}
                 alt="img"
+                width="188"
+                height="282"
+
               />
               <div className=" absolute p-3 bottom-0 h-72 flex flex-col w-10/12 justify-end opacity-0 hover:opacity-100">
                 <div className=" text-base font-black mb-1.5">

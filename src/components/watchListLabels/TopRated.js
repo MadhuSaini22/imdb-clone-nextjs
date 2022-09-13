@@ -1,9 +1,9 @@
-/* eslint-disable @next/next/no-img-element */
 import React, { useContext } from "react";
 import { IMAGE_PATH, SEARCH_IMG } from "../../../Config";
 import Link from "next/link";
 import { GlobalContext } from "../../contexts/GlobalState";
 import { useAuth } from "../../contexts/AuthUserProvider";
+import Image from "next/image";
 export const TopRated = ({ movie }) => {
   const { authUser } = useAuth();
   const { addMovieToWatchlist, watchlist, watched } = useContext(GlobalContext);
@@ -22,11 +22,14 @@ export const TopRated = ({ movie }) => {
         <div className="relative">
           <Link href={`/movieDetail/${movie.id}`}>
             <a>
-              <img
+              <Image
                 className=""
                 src={`${SEARCH_IMG}/original/${movie.poster_path}`}
                 alt="img"
-              />
+                width="250px"
+                height="397px"
+              />            
+
             </a>
           </Link>
           {/* { console.log(watchlistDisabled)} */}

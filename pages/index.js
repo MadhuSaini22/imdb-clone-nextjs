@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 import React, { useEffect, useState } from "react";
 import loader from "../src/assets/1544764567.svg";
 import Image from "next/image";
@@ -60,12 +59,14 @@ function Home(props) {
                   {upcomingMovies.map((movie) => (
                     <div key={movie.id} className="grid grid-cols-4 gap-2 ">
                       <div className="col-span-1 ">
-                        <img
-                          className="p-1 pb-3 h-[125px]"
+                        <Image
+                          className="p-1 pb-3 h-[125px] object-fill"
                           src={`  ${SEARCH_IMG}/original/${
                             movie ? movie.poster_path : ""
                           }`}
                           alt="img"
+                          height={125}
+                          width={"100%"}
                         />
                       </div>
 
