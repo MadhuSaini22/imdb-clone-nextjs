@@ -21,4 +21,4 @@ if (!Firebase.apps.length) {
   Firebase.initializeApp(FirebaseCredentials);
 }
 
-export { Firebase as _Firebase };
+export { Firebase };
