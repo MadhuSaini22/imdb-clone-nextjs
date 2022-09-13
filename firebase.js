@@ -1,5 +1,5 @@
-import Firebase from "Firebase/compat/app";
-import "Firebase/compat/auth";
+import Firebase from "firebase/compat/app";
+import "firebase/compat/auth";
 import {
   FIREBASE_API_KEY,
   FIREBASE_APP_ID,
