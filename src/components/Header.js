@@ -34,7 +34,7 @@ const Header = () => {
         .then((res) => res.json())
         .then((data) => {
           if (!data.errors) {
-            console.log("setting results");
+            // console.log("setting results");
             setResults(data.results.slice(0, 8));
           } else {
             setResults([]);

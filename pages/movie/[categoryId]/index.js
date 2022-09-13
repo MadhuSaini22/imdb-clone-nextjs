@@ -5,31 +5,15 @@ import Card from "../../../src/components/Card";
 import Multiselect from "multiselect-react-dropdown";
 import Heading from "../../../src/components/Heading";
 import { IMAGE_END, TMDB_KEY, IMAGE_START } from "../../../Config";
-function Category() {
+function Category(props) {
   const router = useRouter();
   const categoryId = router.query.categoryId;
 
-  const [movieList, setMovieList] = useState([]);
+  // const [movieList, setMovieList] = useState([]);
+  const { movieList } = props;
   const [selected, setSelected] = useState([]);
   const [data, setData] = useState([]);
-  useEffect(() => {
-    getData();
-  }, []);
-
-  useEffect(() => {
-    getData();
-  }, [categoryId]);
-
-  const getData = () => {
-    fetch(
-      `    ${IMAGE_START}/${
-        categoryId ? categoryId : "popular"
-      }?api_key=${TMDB_KEY}&${IMAGE_END}`
-    )
-      .then((res) => res.json())
-      .then((data) => setMovieList(data.results));
-  };
-  // console.log(selected);
+ 
   const genres = [
     { id: 28, value: "Action" },
     { id: 12, value: "Adventure" },
@@ -73,15 +57,11 @@ function Category() {
   function getSelectedValues() {
     const items = multiselectRef.current.getSelectedItems();
 
-    console.log("items", items);
 
-    console.log(selected, "sselected");
 
     const newArray = items.map((element) => element.id);
-    console.log(newArray);
     setSelected(newArray);
   }
-  console.log(data.length);
   // console.log("selec", selected);
   let counter = 18;
   const arr = [...Array(counter).keys()];
@@ -134,7 +114,22 @@ function Category() {
       </div>
     </div>
   );
-  // return <div className="text-3xl font-bold ">Category {categoryId}</div>;
 }
 
 export default Category;
+
+export async function getServerSideProps(context) {
+  const categoryId = context.params.categoryId
+  const data = await fetch(
+    `    ${IMAGE_START}/${
+      categoryId ? categoryId : "popular"
+    }?api_key=${TMDB_KEY}&${IMAGE_END}`
+  )
+    .then((res) => res.json())   
+
+  return {
+    props: {
+      movieList: data.results || [],
+    }, // will be passed to the page component as props
+  };
+}

@@ -1,27 +1,22 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useRouter } from "next/router";
 import {
   IMAGE_END,
-  IMAGE_PATH,TMDB_KEY,
+  IMAGE_PATH,
+  TMDB_KEY,
   SEARCH_IMG,
   IMAGE_START,
 } from "../../../Config";
-function MovieDetail() {
-  const [currentMovieDetail, setMovie] = useState();
+
+
+function MovieDetail(props) {
   const router = useRouter();
   const movieId = router.query.movieId;
-  console.log(movieId);
-  useEffect(() => {
-    getData();
-    window.scrollTo(0, 0);
-  }, []);
+  // console.log(movieId);
 
-  const getData = () => {
-    fetch(`${IMAGE_START}/${movieId}?api_key=${TMDB_KEY}&${IMAGE_END}`)
-      .then((res) => res.json())
-      .then((data) => setMovie(data));
-  };
-  console.log(currentMovieDetail, "currentMovie");
+  const { currentMovieDetail } = props;
+
+  // console.log(currentMovieDetail, "currentMovie");
 
   return (
     <div className="max-w-container m-auto ">
@@ -164,3 +159,16 @@ function MovieDetail() {
 }
 
 export default MovieDetail;
+
+export async function getServerSideProps(context) {
+  const movieId = context.params.movieId;
+  const data = await fetch(
+    `${IMAGE_START}/${movieId}?api_key=${TMDB_KEY}&${IMAGE_END}`
+  ).then((res) => res.json());
+
+  return {
+    props: {
+      currentMovieDetail: data || [],
+    }, // will be passed to the page component as props
+  };
+}

@@ -10,7 +10,7 @@ function Register() {
   const [error, setError] = useState(null);
 
   const { createUserWithEmailAndPassword } = useAuth();
-const currentUser="simran"
+ 
   const onSubmit = (event) => {
     setError(null);
     //check if passwords match. If they do, create user in Firebase
@@ -49,7 +49,7 @@ const currentUser="simran"
               <form onSubmit={onSubmit}>
                 <div className="rounded  mb-2">
                   <h2 className="text-3xl font-normal">Create account</h2>
-                  {currentUser && currentUser.email}
+                 
                 </div>
 
                 <div className="rounded  mb-3  mt-1">

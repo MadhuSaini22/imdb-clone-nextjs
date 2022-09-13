@@ -43,20 +43,4 @@ const ListCarousel = () => {
 
 export default ListCarousel;
 
-
-// export async function getServerSideProps(context) {
-//   const popData = await  fetch(`${IMAGE_START}/popular?api_key=${TMDB_KEY}&${IMAGE_END}`)
-//   .then((res) => res.json())
-   
-
-//   const topratedData = await fetch(` ${IMAGE_START}/top_rated?api_key=${TMDB_KEY}&${IMAGE_END}`)
-//   .then((res) => res.json())
-   
-
-//   return {
-//     props: {
-//       popularMovies: popData.results || [],
-//       topMovies: topratedData.results || [],
-//     }, // will be passed to the page component as props
-//   };
-// }
+ 

@@ -1,6 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
 import { MovieCard } from "../src/components/MovieCard";
-import { useRouter } from "next/router";
 import { GlobalContext } from "../src/contexts/GlobalState";
 const Watchlist = () => {
   const [data, setData] = useState([]);
