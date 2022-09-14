@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { useRouter } from "next/router";
 import { IMAGE_PATH, SEARCH_IMG } from "../../../Config";
 import Link from "next/link";
 import { GlobalContext } from "../../contexts/GlobalState";
@@ -7,7 +8,7 @@ import Image from "next/image";
 export const TopRated = ({ movie }) => {
   const { authUser } = useAuth();
   const { addMovieToWatchlist, watchlist, watched } = useContext(GlobalContext);
-
+  const router = useRouter();
   let storedMovie = watchlist.find((o) => o.id === movie.id);
   let storedMovieWatched = watched.find((o) => o.id === movie.id);
 
