@@ -99,7 +99,7 @@ function Home(props) {
                   ))}
                 </div>
                 <Link href="/movie/upcoming">
-                  <a className="flex hover:text-yellow-400  font-bold  text-xl">
+                  <a className="flex hover:text-yellow-400 mt-7 font-bold  text-xl">
                     <span className="ml-2">Browse trailers</span>
                     <ChevronRightIcon className="w-5" />
                   </a>
