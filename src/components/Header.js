@@ -14,9 +14,9 @@ const Header = () => {
   // console.log(authUser,"autrh")
   const { watchlist } = useContext(GlobalContext);
   const router = useRouter();
-  useEffect(() => {
-    if (!loading && !authUser) router.push("/signIn");
-  }, [authUser, router, loading]);
+  // useEffect(() => {
+  //   if (!loading && !authUser) router.push("/signIn");
+  // }, [authUser, router, loading]);
 
   const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
