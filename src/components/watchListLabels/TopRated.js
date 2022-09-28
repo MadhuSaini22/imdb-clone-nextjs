@@ -33,7 +33,7 @@ export const TopRated = ({ movie }) => {
 
             </a>
           </Link>
-          {/* { console.log(watchlistDisabled)} */}
+        
           <button
             className="z-[9]"
             disabled={watchlistDisabled}
@@ -156,6 +156,7 @@ export const TopRated = ({ movie }) => {
             )}
           </button>
         </div>
+           {/* Description for slider  */}
         <Link href={`/movieDetail/${movie.id}`}>
           <a>
             <div className="absolute mb-3 p-3 bottom-0 h-40 flex flex-col w-10/12 justify-end opacity-0 hover:opacity-100">

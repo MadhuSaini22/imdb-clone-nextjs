@@ -24,7 +24,6 @@ const MovieList = () => {
     getData();
   }, [type]);
 
-  // console.log(selected);
   const genres = [
     { id: 28, value: "Action" },
     { id: 12, value: "Adventure" },
@@ -68,19 +67,15 @@ const MovieList = () => {
   function getSelectedValues() {
     const items = multiselectRef.current.getSelectedItems();
 
-    console.log("items", items);
-
-    console.log(selected, "sselected");
-
     const newArray = items.map((element) => element.id);
-    console.log(newArray);
+
     setSelected(newArray);
   }
-  console.log(data.length);
-  // console.log("selec", selected);
+
   let counter = 18;
   const arr = [...Array(counter).keys()];
   return (
+    // component for displaying particular type movies
     <div className="container">
       <div className="px-3 min-h-screen">
         <div className="flex lg:flex-row md:flex-row   justify-between items-center  sm:flex-row flex-col text-black  ">

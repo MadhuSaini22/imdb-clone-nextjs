@@ -7,13 +7,13 @@ import "swiper/css/navigation";
 import "swiper/css/effect-fade";
 import Link from "next/link";
 import { TopRated } from "./watchListLabels/TopRated";
-import { IMAGE_PATH, SEARCH_IMG } from "../../Config";
+import { SEARCH_IMG } from "../../Config";
 import { ChevronRightIcon, ChevronLeftIcon } from "@heroicons/react/solid";
 import Image from "next/image";
 
 function Slider({ movies, type }) {
   const [swiperRef, setSwiperRef] = useState();
-  // console.log(movies, "movies in swiper");
+  
   const handleLeftClick = useCallback(() => {
     if (!swiperRef) return;
     swiperRef.slidePrev();
@@ -27,6 +27,7 @@ function Slider({ movies, type }) {
   return (
     <div className="relative">
       <div className="leftarrow font-bold !bg-pink ">
+        {/* slider left button */}
         <button
           onClick={handleLeftClick}
           className="absolute -left-6 z-10 bg-black/30 2xl:visible xl:!visible !invisible -translate-y-1/2 border px-1 py-3 rounded top-1/2 text-white  hover:!text-amber-400"
@@ -34,6 +35,7 @@ function Slider({ movies, type }) {
           <ChevronLeftIcon className="w-11 h-11 flex !font-bold" />
         </button>
       </div>
+      {/* slider container */}
       <Swiper
         onSwiper={setSwiperRef}
         slidesPerView={6}
@@ -107,6 +109,7 @@ function Slider({ movies, type }) {
           </SwiperSlide>
         ))}
       </Swiper>
+      {/* slider right button */}
       <div className="leftarrow font-bold !bg-pink ">
         <button
           onClick={handleRightClick}

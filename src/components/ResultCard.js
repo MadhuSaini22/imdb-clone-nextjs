@@ -6,6 +6,7 @@ import Image from "next/image";
 export const ResultCard = ({ movie }) => {
   return (
     <Link href={`/movieDetail/${movie.id}`}>
+      {/* search box card in header */}
       <a className="flex justify-center items-center">
         <div className="grid grid-cols-12 gap-2  border-t border-gray-500">
           <div className="col-span-1 p-2">

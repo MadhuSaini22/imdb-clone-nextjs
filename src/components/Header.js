@@ -11,12 +11,9 @@ import Image from "next/image";
 const Header = () => {
   const timeout = useRef();
   const { authUser, loading, signOut } = useAuth();
-  // console.log(authUser,"autrh")
+
   const { watchlist } = useContext(GlobalContext);
   const router = useRouter();
-  // useEffect(() => {
-  //   if (!loading && !authUser) router.push("/signIn");
-  // }, [authUser, router, loading]);
 
   const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
@@ -35,7 +32,6 @@ const Header = () => {
         .then((res) => res.json())
         .then((data) => {
           if (!data.errors) {
-            // console.log("setting results");
             setResults(data.results.slice(0, 8));
           } else {
             setResults([]);
@@ -49,6 +45,7 @@ const Header = () => {
   return (
     <div className="flex px-2 justify-center items-center py-1 space-x-2">
       <div className="flex space-x-2 items-center">
+        {/* Header Image */}
         <Link href="/">
           <a className="flex justify-center items-center">
             <Image
@@ -60,6 +57,7 @@ const Header = () => {
             />
           </a>
         </Link>
+        {/* Menu */}
         <Link href="">
           <a>
             <div className="group hover:bg-slate-800   py-2 px-2  lg:px-3 rounded align-middle justify-center flex">
@@ -77,6 +75,7 @@ const Header = () => {
         </Link>
       </div>
       {menu == true ? (
+        // Menu body
         <div className="bg-dark-lightBlack justify-center flex h-full w-full myclass fixed z-20 inset-0 pt-20">
           <div className="lg:w-2/4 mt-5 lg:px-0 px-4">
             <div className="flex mt-2 justify-between">
@@ -90,7 +89,6 @@ const Header = () => {
                       width="95px"
                       height="48px"
                     />
-                   
                   </a>
                 </Link>
               </div>
@@ -241,7 +239,7 @@ const Header = () => {
         <span></span>
       )}
       {error && alert(JSON.stringify(error))}
-
+      {/* Search box */}
       <div className="flex-1  relative">
         <div className="">
           <input
@@ -251,20 +249,7 @@ const Header = () => {
             value={query}
             onChange={onChange}
           />
-          {/* <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-5 w-5 lg:absolute  md:absolute  sm:absolute right-0 lg:right-3 lg:text-slate-500 md:text-slate-500  sm:text-slate-500  lg:top-1/4 md:top-1/4 sm:top-1/4"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            strokeWidth={2}
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-            />
-          </svg> */}
+
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-5 w-5 text-white sm:text-slate-500 absolute right-3 top-1/2 -translate-y-1/2"
@@ -280,6 +265,8 @@ const Header = () => {
             />
           </svg>
         </div>
+
+        {/* Search Results */}
         <div className="z-10 m-auto absolute ">
           <div className="bg-dark-lightBlack">
             {results
@@ -296,7 +283,7 @@ const Header = () => {
           </div>
         </div>
       </div>
-
+      {/* WatchList component */}
       <div className="">
         <Link href="/watchlist">
           <a>
@@ -333,6 +320,7 @@ const Header = () => {
           </a>
         </Link>
       </div>
+      {/* Sign In / Log out button */}
       <Link href={`${authUser ? "/signIn" : "/signInCover"}`}>
         <a>
           <div className=" hover:bg-slate-800 py-2 px-2  rounded align-middle justify-center flex ">

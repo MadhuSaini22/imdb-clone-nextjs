@@ -12,7 +12,7 @@ const Card = ({ movie }) => {
       setIsLoading(false);
     }, 1500);
   }, []);
-
+// This is component for rendering individual card
   return (
     <>
       {isLoading ? (

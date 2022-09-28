@@ -3,18 +3,16 @@ import { GlobalContext } from "../contexts/GlobalState";
 
 export const MovieControls = ({ type, movie }) => {
   const { removeMovieFromWatchlist } = useContext(GlobalContext);
-  
 
   return (
     <div className="">
+      {/* At watchlist component, this button responsible to remove from watchlist - WatchlistControl */}
       {type === "watchlist" && (
         <>
           <button
             className="absolute left-0 top-0 "
             onClick={() => removeMovieFromWatchlist(movie.id)}
           >
-            {/* <i className="fa-fw fa fa-times"></i> */}
-
             <svg
               className="ipc-watchlist-ribbon__bg h-11 w-10 mt-1 absolute justify-center flex overflow-hidden    top-0 left-0 text-3xl "
               width="27px"
@@ -37,12 +35,11 @@ export const MovieControls = ({ type, movie }) => {
                 stroke="#000000"
                 width="20px"
                 height="20px"
-               
               >
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  d="M6 18L18 6M6 6l12 12"  
+                  d="M6 18L18 6M6 6l12 12"
                 />
               </svg>
 

@@ -6,6 +6,7 @@ import Image from "next/image";
 export const MovieCard = ({ movie, type }) => {
   return (
     <div>
+     {/* watchlist component card */}
       <div className="relative  grid grid-cols-5 gap-2 text-dark-forgot border-b m-4 border-gray-500">
         <div className=" col-span-1 p-1">
           {movie.poster_path ? (
@@ -16,7 +17,6 @@ export const MovieCard = ({ movie, type }) => {
               width="101px"
               height="152px"
             />
-           
           ) : (
             <div className="" />
           )}

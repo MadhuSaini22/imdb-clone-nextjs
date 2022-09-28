@@ -22,16 +22,16 @@ const ListCarousel = () => {
       .then((res) => res.json())
       .then((data) => setTopMovies(data.results));
   }, []);
-  // console.log(popularMovies, "popularMovies");
-  // console.log(topMovies, "topMovies");
+
   return (
     <>
       <div className="container ">
+        {/* Popular Movies Carousel */}
         <div className=" sm:w-full p-3">
           <Heading heading=" Featured Popular" />
           <Slider movies={popularMovies} type="popular" />
         </div>
-
+        {/* Top Movies Carousel */}
         <div className="mt-10  p-3 ">
           <Heading heading="Featured Top Rated" />
           <Slider movies={topMovies} />
@@ -42,5 +42,3 @@ const ListCarousel = () => {
 };
 
 export default ListCarousel;
-
- 

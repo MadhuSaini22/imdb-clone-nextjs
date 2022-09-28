@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { GlobalContext } from "../../contexts/GlobalState";
 import Link from "next/link";
 import { useAuth } from "../../contexts/AuthUserProvider";
-import { IMAGE_PATH, SEARCH_IMG } from "../../../Config";
+import {SEARCH_IMG } from "../../../Config";
 import Image from "next/image";
 export const AddWatch = ({ movie }) => {
   const router = useRouter();
@@ -21,6 +21,7 @@ export const AddWatch = ({ movie }) => {
     : false;
   return (
     <div>
+      {/* Slider for popular movies */}
       <div className="relative group ">
         <Link href={`/movieDetail/${movie.id}`}>
           <a>
@@ -33,6 +34,8 @@ export const AddWatch = ({ movie }) => {
             />
           </a>
         </Link>
+
+        {/* Watchlist button At top of slider */}
         <button
           className="z-[9]"
           disabled={watchlistDisabled}
@@ -156,6 +159,7 @@ export const AddWatch = ({ movie }) => {
         </button>
       </div>
       <div></div>
+      {/* Description for slider  */}
       <Link href={`/movieDetail/${movie.id}`}>
         <a>
           <div className=" absolute px-20 py-10 lg:bottom-1 lg:h-4/6 md:h-5/6 sm:h-5/6 max-h-80  flex flex-col justify-center  items-start  transition-opacity bottom-0 ">
