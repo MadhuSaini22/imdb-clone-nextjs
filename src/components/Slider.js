@@ -13,7 +13,7 @@ import Image from "next/image";
 
 function Slider({ movies, type }) {
   const [swiperRef, setSwiperRef] = useState();
-  
+
   const handleLeftClick = useCallback(() => {
     if (!swiperRef) return;
     swiperRef.slidePrev();
@@ -92,7 +92,6 @@ function Slider({ movies, type }) {
                         width="250px"
                         height="397px"
                       />
-                     
                     </div>
 
                     <div className="">
