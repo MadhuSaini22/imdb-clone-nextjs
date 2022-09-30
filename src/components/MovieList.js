@@ -7,22 +7,15 @@ import { IMAGE_END, IMAGE_START, TMDB_KEY } from "../../Config";
 
 const multiselectRef = React.createRef();
 const MovieList = () => {
-  const [movieList, setMovieList] = useState([]);
   const { type } = useParams();
   const [selected, setSelected] = useState([]);
   const [data, setData] = useState([]);
-  useEffect(() => {
-    const getData = () => {
-      fetch(
-        `    ${IMAGE_START}/${
-          type ? type : "popular"
-        }?api_key=${TMDB_KEY}&${IMAGE_END}`
-      )
-        .then((res) => res.json())
-        .then((data) => setMovieList(data.results));
-    };
-    getData();
-  }, [type]);
+  const { movies } = useFetch(
+    `    ${IMAGE_START}/${
+      type ? type : "popular"
+    }?api_key=${TMDB_KEY}&${IMAGE_END}`
+  );
+  const movieList = movies;
 
   const genres = [
     { id: 28, value: "Action" },

@@ -6,16 +6,28 @@ import "swiper/css/effect-fade";
 import Heading from "./Heading";
 import Slider from "./Slider";
 import { IMAGE_END, TMDB_KEY, IMAGE_START } from "../../Config";
+import useFetch from "../../useFetch";
 
 const ListCarousel = () => {
-  const [popularMovies, setPopularMovies] = useState([]);
+  // const [popularMovies, setPopularMovies] = useState([]);
   const [topMovies, setTopMovies] = useState([]);
 
-  useEffect(() => {
-    fetch(`${IMAGE_START}/popular?api_key=${TMDB_KEY}&${IMAGE_END}`)
-      .then((res) => res.json())
-      .then((data) => setPopularMovies(data.results));
-  }, []);
+  const { movies } = useFetch(
+    `${IMAGE_START}/popular?api_key=${TMDB_KEY}&${IMAGE_END}`
+  );
+  const popularMovies = movies;
+  console.log("moviesss neeeeeeeeeeew", popularMovies);
+  // const { movies1 } = useFetch(
+  //   ` ${IMAGE_START}/top_rated?api_key=${TMDB_KEY}&${IMAGE_END}`
+  // );
+  // const topMovies = movies1;
+  // console.log("moviesss neeeeeeeeeeew", topMovies);
+
+  // useEffect(() => {
+  //   fetch(`${IMAGE_START}/popular?api_key=${TMDB_KEY}&${IMAGE_END}`)
+  //     .then((res) => res.json())
+  //     .then((data) => setPopularMovies(data.results));
+  // }, []);
 
   useEffect(() => {
     fetch(` ${IMAGE_START}/top_rated?api_key=${TMDB_KEY}&${IMAGE_END}`)
