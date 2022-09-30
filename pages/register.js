@@ -12,7 +12,7 @@ function Register() {
   const [error, setError] = useState(null);
 
   const { createUserWithEmailAndPassword } = useAuth();
- 
+
   const onSubmit = (event) => {
     setError(null);
     //check if passwords match. If they do, create user in Firebase
@@ -33,11 +33,11 @@ function Register() {
 
   return (
     <div>
+      {/* register page */}
       <div className="downContainerMain bg-white">
         <div className="max-w-container m-auto bg-white">
           <div className=" w-full justify-items-center  font-sans p-2">
             <div className=" mb-5  mt-2 grid  justify-center ">
-              
               <Image
                 className=" h-14"
                 src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/IMDB_Logo_2016.svg/2560px-IMDB_Logo_2016.svg.png"
@@ -54,7 +54,6 @@ function Register() {
               <form onSubmit={onSubmit}>
                 <div className="rounded  mb-2">
                   <h2 className="text-3xl font-normal">Create account</h2>
-                 
                 </div>
 
                 <div className="rounded  mb-3  mt-1">
@@ -74,7 +73,6 @@ function Register() {
                   <input
                     className="w-full text-slate-600 text-sm py-1 focus:border-orange-600 focus:shadow-input-focus px-2 border border-gray-400 rounded outline-none "
                     placeholder="at least 8 characters"
-                    
                     type="password"
                     name="passwordOne"
                     value={passwordOne}
@@ -97,7 +95,6 @@ function Register() {
                     onChange={(event) => setPasswordTwo(event.target.value)}
                     id="signUpPassword2"
                     type="password"
-                    
                     required
                   />
                 </div>
@@ -106,7 +103,6 @@ function Register() {
                   <button
                     className={`bg-yellowLight  border-gray-400 text-sm w-full rounded border outline-none cursor-pointer h-8 text-slate-900`}
                     type="submit"
-                    
                   >
                     Create your IMDb account
                   </button>
@@ -172,8 +168,6 @@ function Register() {
 }
 
 export default Register;
-
-
 
 // public class ENACTON{
 //     public static void main(String[] args){

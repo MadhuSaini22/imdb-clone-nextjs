@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import loader from "../src/assets/1544764567.svg";
+import React, { useState } from "react";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Autoplay, EffectFade, Navigation } from "swiper";
@@ -10,26 +9,32 @@ import "swiper/css/effect-fade";
 import { ChevronRightIcon } from "@heroicons/react/outline";
 import { AddWatch } from "../src/components/watchListLabels/AddWatch";
 import ListCarousel from "../src/components/ListCarousel";
-import {
-  IMAGE_END,
-  IMAGE_PATH,
-  IMAGE_START,
-  TMDB_KEY,
-  SEARCH_IMG,
-} from "../Config.js";
+import { IMAGE_END, IMAGE_START, TMDB_KEY, SEARCH_IMG } from "../Config.js";
 import Link from "next/link";
+import { useSession, signIn, signOut } from "next-auth/react";
 
 function Home(props) {
+  const { data: session } = useSession();
   const { popularMovies, upcomingMovies } = props;
   const [loading, setLoading] = useState(false);
 
   return (
     <>
       <div className=" lg:container ">
+        {/* Home page */}
         <div className="lg:w-full ">
           <div className="">
             <div className="grid grid-cols-12 gap-1 md:px-4 sm:px-4 py-2">
+              {/* {!session && (
+                <button onClick={() => signIn()}>Sign in with Github</button>
+              )}
+              {session && (
+                <button onClick={() => signOut()}>
+                  Sign Out ({session.user.name})
+                </button>
+              )} */}
               <div className="lg:col-span-8 md:col-span-7 lg:px-0 px-3 col-span-12">
+                {/* Home page main carousel */}
                 <Swiper
                   slidesPerView={1}
                   spaceBetween={30}
@@ -50,11 +55,12 @@ function Home(props) {
                   ))}
                 </Swiper>
               </div>
-
+              {/* upcoming movies component */}
               <div className="lg:col-span-4 md:col-span-5  col-span-12  mx-2 ">
                 <p className=" text-yellow-400 mb-4 font-bold text-title-main">
                   Up next
                 </p>
+
                 <div className=" bg-dark-gr bg-gradient-to-b1 from-gray-9001 px-3 ">
                   {upcomingMovies.map((movie) => (
                     <div key={movie.id} className="grid grid-cols-4 gap-2 ">

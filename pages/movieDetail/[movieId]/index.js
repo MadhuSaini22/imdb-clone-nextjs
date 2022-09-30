@@ -1,25 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useRouter } from "next/router";
-import {
-  IMAGE_END,
-  IMAGE_PATH,
-  TMDB_KEY,
-  SEARCH_IMG,
-  IMAGE_START,
-} from "../../../Config";
+import { IMAGE_END, TMDB_KEY, SEARCH_IMG, IMAGE_START } from "../../../Config";
 import Image from "next/image";
 
 function MovieDetail(props) {
   const router = useRouter();
   const movieId = router.query.movieId;
-  // console.log(movieId);
 
   const { currentMovieDetail } = props;
-
-  // console.log(currentMovieDetail, "currentMovie");
+  useEffect(() => {
+    if (currentMovieDetail.success == false) router.push("/");
+  }, [currentMovieDetail, router]);
+  console.log("currentMovie Detail", currentMovieDetail);
 
   return (
     <div className="max-w-container m-auto ">
+      {/* Component for rendering the individual movie detail */}
       <div className="w-full relative flex flex-col justify-center group  items-center">
         <div className=" justify-center group-hover:opacity-75 items-center w-11/12">
           <Image
@@ -74,10 +70,11 @@ function MovieDetail(props) {
               <div className="grid grid-cols-2 mt-3  sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 ">
                 {currentMovieDetail && currentMovieDetail.genres
                   ? currentMovieDetail.genres.map((genre) => (
-                      <div key={genre.id}  className="text-center border-2 border-white p-3 rounded-full">
-                         
-                          {genre.name}
-                         
+                      <div
+                        key={genre.id}
+                        className="text-center border-2 border-white p-3 rounded-full"
+                      >
+                        {genre.name}
                       </div>
                     ))
                   : ""}

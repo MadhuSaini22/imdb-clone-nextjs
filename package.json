@@ -13,6 +13,7 @@
     "firebase": "^9.9.4",
     "multiselect-react-dropdown": "^2.0.25",
     "next": "12.2.5",
+    "next-auth": "^4.12.2",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-loading-skeleton": "^3.1.0",

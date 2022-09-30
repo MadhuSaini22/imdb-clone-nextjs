@@ -1,45 +1,41 @@
 import React, { useState } from "react";
 import { btnvarient } from "../src/staticValues";
 import Button from "../src/components/Button";
-import { useRouter } from 'next/router';
-import { useAuth } from '../src/contexts/AuthUserProvider';
+import { useRouter } from "next/router";
+import { useAuth } from "../src/contexts/AuthUserProvider";
 import Image from "next/image";
 function SignIn() {
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
   const router = useRouter();
   const { signInWithEmailAndPassword } = useAuth();
 
-  const onSubmit = event => {
-    setError(null)
+  const onSubmit = (event) => {
+    setError(null);
     signInWithEmailAndPassword(email, password)
-    .then(authUser => {
-      router.push('/');
-    })
-    .catch(error => {
-      setError(error.message)
-    });
+      .then((authUser) => {
+        router.push("/");
+      })
+      .catch((error) => {
+        setError(error.message);
+      });
     event.preventDefault();
   };
 
-
   return (
-
     <div className=" h-screen bg-white">
-   
+      {/* SignIn page */}
       <div className="max-w-container m-auto bg-white">
         <div className=" w-full justify-items-center  font-sans p-2">
           <div className=" mb-5  mt-2 grid  justify-center ">
-        
-          <Image
-                className=" h-14"
-                src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/IMDB_Logo_2016.svg/2560px-IMDB_Logo_2016.svg.png"
-                alt="img"
-                height="56px"
-                width="111px"
-              />
+            <Image
+              className=" h-14"
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/IMDB_Logo_2016.svg/2560px-IMDB_Logo_2016.svg.png"
+              alt="img"
+              height="56px"
+              width="111px"
+            />
           </div>
           {console.log(JSON.stringify(error))}
           {error && alert(JSON.stringify(error))}
@@ -58,7 +54,6 @@ function SignIn() {
                   name="email"
                   id="loginEmail"
                   type="email"
-                  
                   required
                 />
               </div>
@@ -91,11 +86,7 @@ function SignIn() {
                 >
                   Sign-In
                 </button> */}
-                <Button
-                  label="Sign-In"
-                 
-                  varient={btnvarient.primary}
-                />
+                <Button label="Sign-In" varient={btnvarient.primary} />
                 {console.log(btnvarient)}
               </div>
             </form>

@@ -8,12 +8,10 @@ import { IMAGE_END, TMDB_KEY, IMAGE_START } from "../../../Config";
 function Category(props) {
   const router = useRouter();
   const categoryId = router.query.categoryId;
-
-  // const [movieList, setMovieList] = useState([]);
   const { movieList } = props;
   const [selected, setSelected] = useState([]);
   const [data, setData] = useState([]);
- 
+
   const genres = [
     { id: 28, value: "Action" },
     { id: 12, value: "Adventure" },
@@ -57,15 +55,15 @@ function Category(props) {
   function getSelectedValues() {
     const items = multiselectRef.current.getSelectedItems();
 
-
-
     const newArray = items.map((element) => element.id);
     setSelected(newArray);
   }
-  // console.log("selec", selected);
+
   let counter = 18;
   const arr = [...Array(counter).keys()];
   return (
+    // Component for rendering the individual category movies
+
     <div className="container">
       <div className="px-3 min-h-screen">
         <div className="flex lg:flex-row md:flex-row   justify-between items-center  sm:flex-row flex-col text-black  ">
@@ -119,13 +117,12 @@ function Category(props) {
 export default Category;
 
 export async function getServerSideProps(context) {
-  const categoryId = context.params.categoryId
+  const categoryId = context.params.categoryId;
   const data = await fetch(
     `    ${IMAGE_START}/${
       categoryId ? categoryId : "popular"
     }?api_key=${TMDB_KEY}&${IMAGE_END}`
-  )
-    .then((res) => res.json())   
+  ).then((res) => res.json());
 
   return {
     props: {
